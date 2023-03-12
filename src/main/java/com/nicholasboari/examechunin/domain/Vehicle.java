@@ -27,7 +27,7 @@ public class Vehicle {
     private Double year;
     private Double price;
     private String description;
-    private List<String> imageUri;
+    private String imageUri;
     private VehicleTypeEnum vehicleType;
     private VehicleModelEnum vehicleModel;
 
