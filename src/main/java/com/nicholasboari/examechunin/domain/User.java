@@ -1,4 +1,4 @@
-package com.nicholasboari.examechunin.entities;
+package com.nicholasboari.examechunin.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

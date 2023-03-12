@@ -1,7 +1,7 @@
-package com.nicholasboari.examechunin.entities;
+package com.nicholasboari.examechunin.domain;
 
-import com.nicholasboari.examechunin.entities.enums.VehicleModelEnum;
-import com.nicholasboari.examechunin.entities.enums.VehicleTypeEnum;
+import com.nicholasboari.examechunin.domain.enums.VehicleModelEnum;
+import com.nicholasboari.examechunin.domain.enums.VehicleTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

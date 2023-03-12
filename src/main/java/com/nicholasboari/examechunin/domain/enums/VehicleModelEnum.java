@@ -1,4 +1,4 @@
-package com.nicholasboari.examechunin.entities.enums;
+package com.nicholasboari.examechunin.domain.enums;
 
 public enum VehicleModelEnum {
     HATCH, //car
