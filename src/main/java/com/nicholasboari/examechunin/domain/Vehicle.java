@@ -1,14 +1,13 @@
 package com.nicholasboari.examechunin.domain;
 
+import com.nicholasboari.examechunin.domain.enums.VehicleFuelEnum;
 import com.nicholasboari.examechunin.domain.enums.VehicleModelEnum;
 import com.nicholasboari.examechunin.domain.enums.VehicleTypeEnum;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -27,8 +26,8 @@ public class Vehicle {
     private Double year;
     private Double price;
     private String description;
-    private String imageUri;
     private VehicleTypeEnum vehicleType;
     private VehicleModelEnum vehicleModel;
+    private VehicleFuelEnum vehicleFuelEnum;
 
 }

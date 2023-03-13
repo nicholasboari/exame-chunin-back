@@ -1,14 +1,14 @@
 package com.nicholasboari.examechunin.domain.enums;
 
 public enum VehicleModelEnum {
-    HATCH, //car
+
+    //car
+    HATCH,
     SEDAN,
     SUV,
     PICAPE,
-    EIXO_SIMPLES, //truck
-    EIXO_DUPLO,
-    ESPORTIVA, //motorcycle
+
+    //motorcycle
+    ESPORTIVA,
     STREET,
-    CONVENCIONAL, //bus
-    EXECUTIVO
 }
