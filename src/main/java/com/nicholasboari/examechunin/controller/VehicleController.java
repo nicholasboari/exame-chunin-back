@@ -1,16 +1,18 @@
 package com.nicholasboari.examechunin.controller;
 
 import com.nicholasboari.examechunin.domain.Vehicle;
+import com.nicholasboari.examechunin.requests.VehiclePostRequestBody;
+import com.nicholasboari.examechunin.requests.VehiclePutRequestBody;
 import com.nicholasboari.examechunin.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -33,5 +35,25 @@ public class VehicleController {
     @GetMapping("/{id}")
     public ResponseEntity<Vehicle> findById(@PathVariable Long id) {
         return ResponseEntity.ok(vehicleService.findByIdOrThrowBadRequestException(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<Vehicle> save(@RequestBody VehiclePostRequestBody vehiclePostRequestBody) {
+        Vehicle vehicleSaved = vehicleService.save(vehiclePostRequestBody);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}").buildAndExpand(vehicleSaved.getId()).toUri();
+        return ResponseEntity.created(uri).body(vehicleSaved);
+    }
+
+    @PutMapping
+    public ResponseEntity<Vehicle> replace(@RequestBody VehiclePutRequestBody vehiclePutRequestBody) {
+        Vehicle replace = vehicleService.replace(vehiclePutRequestBody);
+        return ResponseEntity.ok().body(replace);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        vehicleService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
