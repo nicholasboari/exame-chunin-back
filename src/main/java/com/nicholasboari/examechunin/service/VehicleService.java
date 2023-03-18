@@ -1,6 +1,9 @@
 package com.nicholasboari.examechunin.service;
 
 import com.nicholasboari.examechunin.domain.Vehicle;
+import com.nicholasboari.examechunin.domain.enums.VehicleFuelEnum;
+import com.nicholasboari.examechunin.domain.enums.VehicleModelEnum;
+import com.nicholasboari.examechunin.domain.enums.VehicleTypeEnum;
 import com.nicholasboari.examechunin.exception.BadRequestException;
 import com.nicholasboari.examechunin.repository.VehicleRepository;
 import com.nicholasboari.examechunin.requests.VehiclePostRequestBody;
@@ -24,6 +27,18 @@ public class VehicleService {
 
     public List<Vehicle> findAllNonPageable() {
         return vehicleRepository.findAll();
+    }
+
+    public List<Vehicle> findByVehicleModel(VehicleModelEnum model) {
+        return vehicleRepository.findByVehicleModel(model);
+    }
+
+    public List<Vehicle> findByVehicleType(VehicleTypeEnum type) {
+        return vehicleRepository.findByVehicleType(type);
+    }
+
+    public List<Vehicle> findByVehicleFuel(VehicleFuelEnum fuel) {
+        return vehicleRepository.findByVehicleFuel(fuel);
     }
 
     public Vehicle findByIdOrThrowBadRequestException(Long id) {

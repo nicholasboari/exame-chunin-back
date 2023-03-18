@@ -1,6 +1,9 @@
 package com.nicholasboari.examechunin.controller;
 
 import com.nicholasboari.examechunin.domain.Vehicle;
+import com.nicholasboari.examechunin.domain.enums.VehicleFuelEnum;
+import com.nicholasboari.examechunin.domain.enums.VehicleModelEnum;
+import com.nicholasboari.examechunin.domain.enums.VehicleTypeEnum;
 import com.nicholasboari.examechunin.requests.VehiclePostRequestBody;
 import com.nicholasboari.examechunin.requests.VehiclePutRequestBody;
 import com.nicholasboari.examechunin.service.VehicleService;
@@ -25,6 +28,21 @@ public class VehicleController {
     @GetMapping
     public ResponseEntity<Page<Vehicle>> findAll(Pageable pageable) {
         return ResponseEntity.ok(vehicleService.findAll(pageable));
+    }
+
+    @GetMapping("/model")
+    public ResponseEntity<List<Vehicle>> findByModel(@RequestParam VehicleModelEnum model) {
+        return ResponseEntity.ok(vehicleService.findByVehicleModel(model));
+    }
+
+    @GetMapping("/type")
+    public ResponseEntity<List<Vehicle>> findByType(@RequestParam VehicleTypeEnum type) {
+        return ResponseEntity.ok(vehicleService.findByVehicleType(type));
+    }
+
+    @GetMapping("/fuel")
+    public ResponseEntity<List<Vehicle>> findByFuel(@RequestParam VehicleFuelEnum fuel) {
+        return ResponseEntity.ok(vehicleService.findByVehicleFuel(fuel));
     }
 
     @GetMapping("/all")
