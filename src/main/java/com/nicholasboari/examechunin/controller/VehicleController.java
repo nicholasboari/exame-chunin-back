@@ -7,6 +7,7 @@ import com.nicholasboari.examechunin.domain.enums.VehicleTypeEnum;
 import com.nicholasboari.examechunin.requests.VehiclePostRequestBody;
 import com.nicholasboari.examechunin.requests.VehiclePutRequestBody;
 import com.nicholasboari.examechunin.service.VehicleService;
+import jakarta.annotation.security.RolesAllowed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -56,6 +57,7 @@ public class VehicleController {
     }
 
     @PostMapping
+    @RolesAllowed("ADMIN")
     public ResponseEntity<Vehicle> save(@RequestBody VehiclePostRequestBody vehiclePostRequestBody) {
         Vehicle vehicleSaved = vehicleService.save(vehiclePostRequestBody);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -64,12 +66,14 @@ public class VehicleController {
     }
 
     @PutMapping
+    @RolesAllowed("ADMIN")
     public ResponseEntity<Vehicle> replace(@RequestBody VehiclePutRequestBody vehiclePutRequestBody) {
         Vehicle replace = vehicleService.replace(vehiclePutRequestBody);
         return ResponseEntity.ok().body(replace);
     }
 
     @DeleteMapping("/{id}")
+    @RolesAllowed("ADMIN")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         vehicleService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
