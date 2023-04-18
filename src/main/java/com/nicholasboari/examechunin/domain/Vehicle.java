@@ -9,6 +9,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @Builder
@@ -33,4 +36,6 @@ public class Vehicle {
     @Enumerated(EnumType.STRING)
     private VehicleFuelEnum vehicleFuel;
 
+    @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<VehicleImage> vehicleImages = new ArrayList<>();
 }

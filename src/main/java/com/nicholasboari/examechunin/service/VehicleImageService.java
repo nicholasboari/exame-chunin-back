@@ -12,13 +12,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Service
 public class VehicleImageService {
@@ -53,23 +54,24 @@ public class VehicleImageService {
                 byte[] bytes = file.getBytes();
                 String imageName = file.getOriginalFilename();
 
-                Path path = Paths.get("c:/imagensExameChunin/" + imageName);
+                Path path = Paths.get("c:/Users/Nicholas/Desktop/exame-chunin-front/imagensExameChunin/" + imageName);
                 Files.write(path, bytes);
 
                 vehicleImage.setName(imageName);
+                vehicleImage.setVehicle(vehicle);
+                vehicle.getVehicleImages().add(vehicleImage);
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        vehicleImage.setVehicle(vehicle);
         return vehicleImageRepository.save(vehicleImage);
     }
 
     public void delete(Long id) {
         VehicleImage vehicleImage = findByIdOrThrowBadRequestException(id);
-        File folder = new File("c:/imagensExameChunin/");
+        File folder = new File("c:/Users/Nicholas/Desktop/exame-chunin-front/imagensExameChunin/");
         File[] files = folder.listFiles();
 
         for (File img : files) {
@@ -82,9 +84,9 @@ public class VehicleImageService {
 
     public VehicleImage replace(Long id, MultipartFile file) {
         VehicleImage vehicleImage = findByIdOrThrowBadRequestException(id);
-        Long vehicleId = vehicleImage.getVehicle().getId();
+        Long vehicleImageId = vehicleImage.getId();
 
         delete(id);
-        return save(vehicleId, file);
+        return save(vehicleImageId, file);
     }
 }

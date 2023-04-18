@@ -3,6 +3,7 @@ package com.nicholasboari.examechunin.controller;
 import com.nicholasboari.examechunin.domain.Vehicle;
 import com.nicholasboari.examechunin.domain.VehicleImage;
 import com.nicholasboari.examechunin.service.VehicleImageService;
+import jakarta.annotation.security.RolesAllowed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,18 +37,21 @@ public class VehicleImageController {
     }
 
     @PostMapping
+    @RolesAllowed("ADMIN")
     public ResponseEntity<VehicleImage> save(@RequestParam("vehicleId") Long id, @RequestParam MultipartFile file) {
         VehicleImage save = vehicleImageService.save(id, file);
         return ResponseEntity.ok().body(save);
     }
 
     @PutMapping("/{id}")
+    @RolesAllowed("ADMIN")
     public ResponseEntity<VehicleImage> replace(@RequestParam Long id, @RequestParam MultipartFile file) {
         VehicleImage replace = vehicleImageService.replace(id, file);
         return ResponseEntity.ok().body(replace);
     }
 
     @DeleteMapping("/{id}")
+    @RolesAllowed("ADMIN")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         vehicleImageService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
