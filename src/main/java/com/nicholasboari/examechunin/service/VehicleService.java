@@ -1,6 +1,7 @@
 package com.nicholasboari.examechunin.service;
 
 import com.nicholasboari.examechunin.domain.Vehicle;
+import com.nicholasboari.examechunin.domain.enums.VehicleBrandEnum;
 import com.nicholasboari.examechunin.domain.enums.VehicleFuelEnum;
 import com.nicholasboari.examechunin.domain.enums.VehicleModelEnum;
 import com.nicholasboari.examechunin.domain.enums.VehicleTypeEnum;
@@ -41,6 +42,9 @@ public class VehicleService {
         return vehicleRepository.findByVehicleFuel(fuel);
     }
 
+    public List<Vehicle> findByVehicleBrand(VehicleBrandEnum brand) {
+        return vehicleRepository.findByVehicleBrand(brand);
+    }
     public Vehicle findByIdOrThrowBadRequestException(Long id) {
         return vehicleRepository.findById(id).orElseThrow(() -> new BadRequestException("Vehicle ID not found"));
     }
@@ -50,6 +54,7 @@ public class VehicleService {
                 .vehicleModel(vehiclePostRequestBody.getVehicleModel())
                 .vehicleType(vehiclePostRequestBody.getVehicleType())
                 .vehicleFuel(vehiclePostRequestBody.getVehicleFuel())
+                .vehicleBrand(vehiclePostRequestBody.getVehicleBrand())
                 .price(vehiclePostRequestBody.getPrice())
                 .year(vehiclePostRequestBody.getYear())
                 .name(vehiclePostRequestBody.getName())
@@ -64,17 +69,16 @@ public class VehicleService {
     public Vehicle replace(VehiclePutRequestBody vehiclePutRequestBody){
         Vehicle vehicleSaved = findByIdOrThrowBadRequestException(vehiclePutRequestBody.getId());
 
-        Vehicle vehicle = Vehicle.builder()
-                .vehicleModel(vehicleSaved.getVehicleModel())
-                .vehicleType(vehicleSaved.getVehicleType())
-                .vehicleFuel(vehicleSaved.getVehicleFuel())
-                .price(vehicleSaved.getPrice())
-                .year(vehicleSaved.getYear())
-                .name(vehicleSaved.getName())
-                .description(vehicleSaved.getDescription())
-                .id(vehicleSaved.getId())
-                .build();
-        return vehicleRepository.save(vehicle);
+        vehicleSaved.setPrice(vehiclePutRequestBody.getPrice());
+        vehicleSaved.setYear(vehiclePutRequestBody.getYear());
+        vehicleSaved.setName(vehiclePutRequestBody.getName());
+        vehicleSaved.setDescription(vehiclePutRequestBody.getDescription());
+        vehicleSaved.setVehicleModel(vehiclePutRequestBody.getVehicleModel());
+        vehicleSaved.setVehicleBrand(vehiclePutRequestBody.getVehicleBrand());
+        vehicleSaved.setVehicleFuel(vehiclePutRequestBody.getVehicleFuel());
+        vehicleSaved.setVehicleType(vehiclePutRequestBody.getVehicleType());
+
+        return vehicleRepository.save(vehicleSaved);
     }
 
 }

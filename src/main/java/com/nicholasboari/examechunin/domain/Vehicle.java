@@ -1,5 +1,6 @@
 package com.nicholasboari.examechunin.domain;
 
+import com.nicholasboari.examechunin.domain.enums.VehicleBrandEnum;
 import com.nicholasboari.examechunin.domain.enums.VehicleFuelEnum;
 import com.nicholasboari.examechunin.domain.enums.VehicleModelEnum;
 import com.nicholasboari.examechunin.domain.enums.VehicleTypeEnum;
@@ -28,6 +29,7 @@ public class Vehicle {
     @Column(name = "model_year")
     private Integer year;
     private Double price;
+    @Column(length = 500)
     private String description;
     @Enumerated(EnumType.STRING)
     private VehicleTypeEnum vehicleType;
@@ -35,7 +37,9 @@ public class Vehicle {
     private VehicleModelEnum vehicleModel;
     @Enumerated(EnumType.STRING)
     private VehicleFuelEnum vehicleFuel;
+    @Enumerated(EnumType.STRING)
+    private VehicleBrandEnum vehicleBrand;
 
-    @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "vehicle", cascade = CascadeType.REMOVE)
     private List<VehicleImage> vehicleImages = new ArrayList<>();
 }
