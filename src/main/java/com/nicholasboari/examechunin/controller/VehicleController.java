@@ -63,7 +63,7 @@ public class VehicleController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Vehicle> save(@RequestBody VehiclePostRequestBody vehiclePostRequestBody) {
         Vehicle vehicleSaved = vehicleService.save(vehiclePostRequestBody);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -72,14 +72,14 @@ public class VehicleController {
     }
 
     @PutMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Vehicle> replace(@RequestBody VehiclePutRequestBody vehiclePutRequestBody) {
         Vehicle replace = vehicleService.replace(vehiclePutRequestBody);
         return ResponseEntity.ok().body(replace);
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         vehicleService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
