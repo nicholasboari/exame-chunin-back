@@ -58,7 +58,9 @@ public class VehicleService {
                 .price(vehiclePostRequestBody.getPrice())
                 .year(vehiclePostRequestBody.getYear())
                 .name(vehiclePostRequestBody.getName())
-                .description(vehiclePostRequestBody.getDescription()).build();
+                .description(vehiclePostRequestBody.getDescription())
+                .imageUrl(vehiclePostRequestBody.getImageUrl())
+                .build();
         return vehicleRepository.save(vehicle);
     }
 
@@ -77,7 +79,7 @@ public class VehicleService {
         vehicleSaved.setVehicleBrand(vehiclePutRequestBody.getVehicleBrand());
         vehicleSaved.setVehicleFuel(vehiclePutRequestBody.getVehicleFuel());
         vehicleSaved.setVehicleType(vehiclePutRequestBody.getVehicleType());
-
+        vehicleSaved.setImageUrl(vehiclePutRequestBody.getImageUrl());
         return vehicleRepository.save(vehicleSaved);
     }
 

@@ -31,6 +31,8 @@ public class Vehicle {
     private Double price;
     @Column(length = 500)
     private String description;
+    @Lob
+    private String imageUrl;
     @Enumerated(EnumType.STRING)
     private VehicleTypeEnum vehicleType;
     @Enumerated(EnumType.STRING)
@@ -40,6 +42,4 @@ public class Vehicle {
     @Enumerated(EnumType.STRING)
     private VehicleBrandEnum vehicleBrand;
 
-    @OneToMany(mappedBy = "vehicle", cascade = CascadeType.REMOVE)
-    private List<VehicleImage> vehicleImages = new ArrayList<>();
 }

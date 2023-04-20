@@ -7,6 +7,7 @@ import com.nicholasboari.examechunin.domain.enums.VehicleTypeEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.Lob;
 import lombok.Data;
 
 @Data
@@ -18,6 +19,8 @@ public class VehiclePutRequestBody {
     private Double price;
     @Column(length = 500)
     private String description;
+    @Lob
+    private String imageUrl;
     private VehicleTypeEnum vehicleType;
     private VehicleModelEnum vehicleModel;
     private VehicleFuelEnum vehicleFuel;
