@@ -10,9 +10,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @Builder
@@ -29,9 +26,9 @@ public class Vehicle {
     @Column(name = "model_year")
     private Integer year;
     private Double price;
-    @Column(length = 500)
+    @Column(length = 450)
     private String description;
-    @Lob
+    @Column(length = 65555)
     private String imageUrl;
     @Enumerated(EnumType.STRING)
     private VehicleTypeEnum vehicleType;

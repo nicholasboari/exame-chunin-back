@@ -28,42 +28,57 @@ public class VehicleController {
     private VehicleService vehicleService;
 
     @GetMapping
+    @CrossOrigin(value = "http://localhost:5173")
     public ResponseEntity<Page<Vehicle>> findAll(Pageable pageable) {
         return ResponseEntity.ok(vehicleService.findAll(pageable));
     }
 
     @GetMapping("/model")
+    @CrossOrigin(value = "http://localhost:5173")
     public ResponseEntity<List<Vehicle>> findByModel(@RequestParam VehicleModelEnum model) {
         return ResponseEntity.ok(vehicleService.findByVehicleModel(model));
     }
 
     @GetMapping("/type")
+    @CrossOrigin(value = "http://localhost:5173")
     public ResponseEntity<List<Vehicle>> findByType(@RequestParam VehicleTypeEnum type) {
         return ResponseEntity.ok(vehicleService.findByVehicleType(type));
     }
 
     @GetMapping("/fuel")
+    @CrossOrigin(value = "http://localhost:5173")
     public ResponseEntity<List<Vehicle>> findByFuel(@RequestParam VehicleFuelEnum fuel) {
         return ResponseEntity.ok(vehicleService.findByVehicleFuel(fuel));
     }
 
     @GetMapping("/brand")
+    @CrossOrigin(value = "http://localhost:5173")
     public ResponseEntity<List<Vehicle>> findByBrand(@RequestParam VehicleBrandEnum brand) {
         return ResponseEntity.ok(vehicleService.findByVehicleBrand(brand));
     }
 
     @GetMapping("/all")
+    @CrossOrigin(value = "http://localhost:5173")
     public ResponseEntity<List<Vehicle>> listAll() {
         return ResponseEntity.ok(vehicleService.findAllNonPageable());
     }
 
     @GetMapping("/{id}")
+    @CrossOrigin(value = "http://localhost:5173")
     public ResponseEntity<Vehicle> findById(@PathVariable Long id) {
         return ResponseEntity.ok(vehicleService.findByIdOrThrowBadRequestException(id));
     }
 
+    @GetMapping("/admin")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @CrossOrigin(value = "http://localhost:5173", allowCredentials = "false")
+    public ResponseEntity<Void> admin() {
+        return ResponseEntity.ok().build();
+    }
+
     @PostMapping
     @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @CrossOrigin(value = "http://localhost:5173", allowCredentials = "true")
     public ResponseEntity<Vehicle> save(@RequestBody VehiclePostRequestBody vehiclePostRequestBody) {
         Vehicle vehicleSaved = vehicleService.save(vehiclePostRequestBody);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -73,6 +88,7 @@ public class VehicleController {
 
     @PutMapping
     @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @CrossOrigin(value = "http://localhost:5173", allowCredentials = "true")
     public ResponseEntity<Vehicle> replace(@RequestBody VehiclePutRequestBody vehiclePutRequestBody) {
         Vehicle replace = vehicleService.replace(vehiclePutRequestBody);
         return ResponseEntity.ok().body(replace);
@@ -80,6 +96,7 @@ public class VehicleController {
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @CrossOrigin(value = "http://localhost:5173", allowCredentials = "true")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         vehicleService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
