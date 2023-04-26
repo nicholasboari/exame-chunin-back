@@ -30,6 +30,11 @@ public class VehicleService {
         return vehicleRepository.findAll();
     }
 
+    public Page<Vehicle> findByNameContaining(String name, Pageable pageable) {
+        return vehicleRepository.findByNameContaining(name, pageable);
+    }
+
+
     public List<Vehicle> findByVehicleModel(VehicleModelEnum model) {
         return vehicleRepository.findByVehicleModel(model);
     }
@@ -45,11 +50,12 @@ public class VehicleService {
     public List<Vehicle> findByVehicleBrand(VehicleBrandEnum brand) {
         return vehicleRepository.findByVehicleBrand(brand);
     }
+
     public Vehicle findByIdOrThrowBadRequestException(Long id) {
         return vehicleRepository.findById(id).orElseThrow(() -> new BadRequestException("Vehicle ID not found"));
     }
 
-    public Vehicle save(VehiclePostRequestBody vehiclePostRequestBody){
+    public Vehicle save(VehiclePostRequestBody vehiclePostRequestBody) {
         Vehicle vehicle = Vehicle.builder()
                 .vehicleModel(vehiclePostRequestBody.getVehicleModel())
                 .vehicleType(vehiclePostRequestBody.getVehicleType())
@@ -64,12 +70,12 @@ public class VehicleService {
         return vehicleRepository.save(vehicle);
     }
 
-    public void delete(Long id){
+    public void delete(Long id) {
         vehicleRepository.delete(findByIdOrThrowBadRequestException(id));
     }
 
-    public Vehicle replace(VehiclePutRequestBody vehiclePutRequestBody){
-        Vehicle vehicleSaved = findByIdOrThrowBadRequestException(vehiclePutRequestBody.getId());
+    public Vehicle replace(VehiclePutRequestBody vehiclePutRequestBody, Long id) {
+        Vehicle vehicleSaved = findByIdOrThrowBadRequestException(id);
 
         vehicleSaved.setPrice(vehiclePutRequestBody.getPrice());
         vehicleSaved.setYear(vehiclePutRequestBody.getYear());

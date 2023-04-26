@@ -33,6 +33,12 @@ public class VehicleController {
         return ResponseEntity.ok(vehicleService.findAll(pageable));
     }
 
+    @GetMapping("/name")
+    @CrossOrigin(value = "http://localhost:5173")
+    public ResponseEntity<Page<Vehicle>> findByNameContaining(@RequestParam String name, Pageable pageable) {
+        return ResponseEntity.ok(vehicleService.findByNameContaining(name, pageable));
+    }
+
     @GetMapping("/model")
     @CrossOrigin(value = "http://localhost:5173")
     public ResponseEntity<List<Vehicle>> findByModel(@RequestParam VehicleModelEnum model) {
@@ -86,11 +92,11 @@ public class VehicleController {
         return ResponseEntity.created(uri).body(vehicleSaved);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @CrossOrigin(value = "http://localhost:5173", allowCredentials = "true")
-    public ResponseEntity<Vehicle> replace(@RequestBody VehiclePutRequestBody vehiclePutRequestBody) {
-        Vehicle replace = vehicleService.replace(vehiclePutRequestBody);
+    public ResponseEntity<Vehicle> replace(@PathVariable Long id, @RequestBody VehiclePutRequestBody vehiclePutRequestBody) {
+        Vehicle replace = vehicleService.replace(vehiclePutRequestBody, id);
         return ResponseEntity.ok().body(replace);
     }
 
