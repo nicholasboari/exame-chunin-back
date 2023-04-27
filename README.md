@@ -12,10 +12,6 @@ Este projeto é uma aplicação de gerenciamento de carro desenvolvido com Sprin
 - JPA
 - H2 database
 
-## Requisitos
-- Java 11 ou superior
-- Maven 3 ou superior
-
 ## Instalação
 Clone o repositório para o seu computador.
 Abra o terminal na pasta raiz do projeto e execute o seguinte comando para compilar e empacotar a aplicação:
