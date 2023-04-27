@@ -1,5 +1,5 @@
 ## Sobre o projeto
-O projeto é voltado ao desenvolvimento de um sistema de venda de carros, o usuario possui permissões de visualizar dados dos veiculos, tais como: imagem, modelo, preço, ano, entre outros. O Administrador terá acesso ao gerenciamento da loja de carro, podendo adicionar um novo veiculo, atualizar o proprio e até mesmo a excluir, tornando o sistema bem flexivel e fácil de dar manuntenção.
+Este projeto é uma aplicação de gerenciamento de carro desenvolvido com Spring Boot. Ele permite que os administradores criem, atualizem, excluam e obtenham informações sobre os veículos cadastrados no sistema, e os usuários apenas visualizem os veículos.
 
 ## Tecnologias utilizadas
 
