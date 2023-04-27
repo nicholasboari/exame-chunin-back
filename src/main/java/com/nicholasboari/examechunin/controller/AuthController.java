@@ -3,6 +3,7 @@ package com.nicholasboari.examechunin.controller;
 import com.nicholasboari.examechunin.domain.User;
 import com.nicholasboari.examechunin.requests.Login;
 import com.nicholasboari.examechunin.service.TokenService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,9 +24,10 @@ public class AuthController {
 
     @PostMapping("/login")
     @CrossOrigin(value = "http://localhost:5173", allowCredentials = "true")
+    @Operation(summary = "Get token JWT")
     public String login(@RequestBody Login login) {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                new UsernamePasswordAuthenticationToken(login.login(), login.password());
+                new UsernamePasswordAuthenticationToken(login.getLogin(), login.getPassword());
         Authentication authenticate = this.authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 
         var user = (User) authenticate.getPrincipal();
