@@ -5,9 +5,11 @@ import com.nicholasboari.examechunin.domain.enums.VehicleFuelEnum;
 import com.nicholasboari.examechunin.domain.enums.VehicleModelEnum;
 import com.nicholasboari.examechunin.domain.enums.VehicleTypeEnum;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class VehiclePostRequestBody {
 
     @NotBlank(message = "Campo obrigatório")

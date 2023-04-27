@@ -87,9 +87,7 @@ public class VehicleController {
     @CrossOrigin(value = "http://localhost:5173", allowCredentials = "true")
     public ResponseEntity<Vehicle> save(@RequestBody VehiclePostRequestBody vehiclePostRequestBody) {
         Vehicle vehicleSaved = vehicleService.save(vehiclePostRequestBody);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}").buildAndExpand(vehicleSaved.getId()).toUri();
-        return ResponseEntity.created(uri).body(vehicleSaved);
+        return new ResponseEntity<>(vehicleSaved, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
